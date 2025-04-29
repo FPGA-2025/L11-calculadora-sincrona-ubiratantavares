@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$1" ]; then
     echo "Erro: É preciso especificar o número do teste"
     exit 1
@@ -10,7 +11,7 @@ cp saida.out test/saida$1.out
 cp saida.vcd test/saida$1.vcd
 rm saida.out saida.vcd
 
-if diff <(grep -v '\$finish' test/saida$1.out) test/saida$1.ok >/dev/null; then
+if diff -w <(grep -v '\$finish' test/saida$1.out) test/saida$1.ok >/dev/null; then
     echo "OK"
     exit 0
 else
